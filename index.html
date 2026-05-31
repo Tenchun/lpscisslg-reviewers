@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSLG Reviewers</title>
+
+  <style>
+    @font-face {
+      font-family: 'Garet';
+      src: url('assets/fonts/Garet-Heavy.woff2') format('woff2'),
+           url('assets/fonts/Garet-Heavy.woff') format('woff'),
+           url('assets/fonts/Garet-Heavy.ttf') format('truetype'),
+           url('assets/fonts/Garet-Heavy.otf') format('opentype');
+      font-weight: 800 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Garet';
+      src: url('assets/fonts/Garet-Book.woff2') format('woff2'),
+           url('assets/fonts/Garet-Book.woff') format('woff'),
+           url('assets/fonts/Garet-Book.ttf') format('truetype');
+      font-weight: 300 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Canva Sans';
+      src: url('assets/fonts/CanvaSans-Regular.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Canva Sans';
+      src: url('assets/fonts/CanvaSans-Medium.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Canva Sans';
+      src: url('assets/fonts/CanvaSans-Bold.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --gold: #f2c14e;
+      --gold-2: #f7d66a;
+      --maroon: #761a1a;
+      --maroon-2: #8b1f1e;
+      --maroon-dark: #5f1412;
+      --paper: #ffffff;
+      --ink: #7b1d1b;
+      --shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+      --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.12);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --nav-h: 100px;
+      --topbar-h: 34px;
+      --footer-h: 135px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; }
+    body {
+      font-family: 'Canva Sans', Arial, sans-serif;
+      background: #6f1817;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background: url('assets/images/reviewers-bg.png') center/cover no-repeat;
+    }
+
+    /* Top gold bar */
+    .topbar {
+      height: var(--topbar-h);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 18px;
+      background: url('assets/images/gold.png') center/cover no-repeat;
+      color: #6d1716;
+      font-family: 'Canva Sans', Arial, sans-serif;
+      font-size: 13px;
+      position: relative;
+      z-index: 50;
+    }
+
+    .topbar .left,
+    .topbar .right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .phone-icon {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Header */
+    .header-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+    }
+
+    .header {
+      height: var(--nav-h);
+      background: url('assets/pogi header bg.png') center/cover no-repeat, #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px 0 22px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform .25s ease, opacity .25s ease;
+      min-width: 170px;
+    }
+    .brand:hover { transform: translateY(-1px); }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+      flex: 0 0 auto;
+    }
+
+    .brand-text {
+      line-height: 1.05;
+      color: #7b1d1b;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .brand-title {
+      font-family: 'Garet', Arial, sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      font-size: 31px;
+    }
+
+    .brand-subtitle {
+      margin-top: 3px;
+      font-family: 'Canva Sans', Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: auto;
+      margin-right: 6px;
+      position: relative;
+    }
+
+    .nav-group {
+      position: relative;
+    }
+
+    .nav-item {
+      position: relative;
+      padding: 14px 12px 16px;
+      color: #8a2824;
+      font-family: 'Canva Sans', Arial, sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      cursor: pointer;
+      border: 0;
+      background: transparent;
+      transition: transform .2s ease, color .2s ease, font-weight .2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      user-select: none;
+    }
+
+    .nav-item .arrow {
+      font-size: 11px;
+      transform: translateY(1px) rotate(0deg);
+      transition: transform .28s ease;
+      opacity: .9;
+    }
+
+    .nav-item.active {
+      font-weight: 700;
+      color: #7b1d1b;
+    }
+
+    .nav-item.active::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 11px;
+      width: 22px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--maroon);
+    }
+
+    .nav-item.active .arrow {
+      transform: translateY(1px) rotate(180deg);
+    }
+
+    .nav-item:hover { transform: translateY(-1px); }
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      min-width: 180px;
+      background: rgba(255,255,255,0.98);
+      border-radius: 14px;
+      box-shadow: 0 16px 32px rgba(0,0,0,.15);
+      border: 1px solid rgba(123,29,27,0.08);
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .26s ease, transform .26s ease, visibility .26s ease;
+      z-index: 70;
+    }
+
+    .dropdown.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(6px);
+    }
+
+    .dropdown a, .dropdown button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border: 0;
+      background: transparent;
+      color: #7b1d1b;
+      font-family: 'Canva Sans', Arial, sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background .2s ease, padding-left .2s ease;
+      text-align: left;
+    }
+
+    .dropdown a:hover, .dropdown button:hover {
+      background: rgba(242, 193, 78, 0.15);
+      padding-left: 18px;
+    }
+
+    .dropdown .divider {
+      height: 1px;
+      background: rgba(123,29,27,0.08);
+      margin: 0;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      width: 38px;
+      height: 38px;
+      position: relative;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 6px;
+      overflow: visible;
+    }
+
+    .hamburger span {
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      background: #8a2824;
+      border-radius: 999px;
+      left: 50%;
+      top: 50%;
+      transform-origin: center;
+      transition: transform .25s ease, opacity .2s ease;
+    }
+
+    .hamburger span:nth-child(1) { transform: translate(-50%, -6px); }
+    .hamburger span:nth-child(2) { transform: translate(-50%, 0); }
+    .hamburger span:nth-child(3) { transform: translate(-50%, 6px); }
+
+    .hamburger.open span:nth-child(1) { transform: translate(-50%, 0) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translate(-50%, 0) rotate(-45deg); }
+
+    #hamburgerDropdown {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 10px;
+      min-width: 180px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: all .25s ease;
+      z-index: 1200;
+    }
+
+    #hamburgerDropdown.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* Body */
+    .hero {
+      position: relative;
+      flex: 1;
+      background: url('assets/pogi body bg.png') center/cover no-repeat;
+      padding: 26px 0 32px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(114,20,21,.14), rgba(114,20,21,.18));
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1050px, 100%);
+      margin: 0 auto;
+      min-height: 640px;
+    }
+
+    .title {
+      font-family: 'Garet', Arial, sans-serif;
+      font-weight: 800;
+      font-size: 49px;
+      margin: 5px 0 9px 40px;
+      letter-spacing: 0.2px;
+      color: #fff;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.06);
+    }
+
+    .title-underline {
+      width: 73px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f4cc5c, #ffdd70);
+      margin-left: 40px;
+      margin-bottom: 30px;
+    }
+
+
+    .watermark {
+      position: absolute;
+      right: -12px;
+      top: 122px;
+      width: 620px;
+      height: 560px;
+      opacity: .18;
+      background: radial-gradient(circle at 40% 42%, rgba(255,255,255,.08) 0 20%, transparent 21%),
+                  radial-gradient(circle at 58% 52%, rgba(255,255,255,.08) 0 18%, transparent 19%),
+                  radial-gradient(circle at 52% 48%, rgba(255,255,255,.08) 0 25%, transparent 26%);
+      filter: blur(1px);
+      pointer-events: none;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 70px 92px;
+      width: 780px;
+      margin: 0 auto;
+      padding-top: 20px;
+      padding-bottom: 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card-link {
+      display: block;
+      position: relative;
+      transform: translateZ(0);
+      transition: transform .22s ease, filter .22s ease;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      min-height: 184px;
+      box-shadow: 0 8px 16px rgba(0,0,0,.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      color: var(--ink);
+      border: 1px solid rgba(0,0,0,.02);
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 11px;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f7d66a, #f2c14e);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .28s ease;
+    }
+
+    .card-link:hover { transform: translateY(-6px) scale(1.01); }
+    .card-link:hover .card::after,
+    .card-link:focus-visible .card::after,
+    .card-link.active .card::after {
+      transform: scaleX(1);
+    }
+    .card-link:active { transform: translateY(-2px) scale(0.985); }
+
+    .card-number {
+      font-family: 'Garet', Arial, sans-serif;
+      font-weight: 800;
+      font-size: 94px;
+      line-height: 1;
+      margin-top: 10px;
+      letter-spacing: -2px;
+    }
+
+    .card-label {
+      font-family: 'Garet', Arial, sans-serif;
+      font-weight: 800;
+      font-size: 30px;
+      letter-spacing: 0.5px;
+      margin-top: -2px;
+    }
+
+    /* Footer */
+    .footer-wrap {
+      position: relative;
+      z-index: 40;
+      box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.18);
+    }
+
+    .footer {
+      height: var(--footer-h);
+      background: #631e1b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px 0 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: transform .22s ease;
+      min-width: 320px;
+    }
+    .footer-left:hover { transform: translateY(-1px); }
+
+    .footer-logo {
+      width: 90px;
+      height: 82px;
+      object-fit: contain;
+      display: block;
+      flex: 0 0 auto;
+    }
+
+    .footer-image-text {
+      width: 190px;
+      height: auto;
+      display: block;
+      max-width: 100%;
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-right: 4px;
+    }
+
+    .social-link {
+      width: 30px;
+      height: 30px;
+      display: inline-grid;
+      place-items: center;
+      transition: transform .2s ease, filter .2s ease;
+      border-radius: 50%;
+    }
+    .social-link:hover { transform: translateY(-3px) scale(1.09); }
+    .social-link:active { transform: translateY(-1px) scale(0.97); }
+
+    .social-link img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .footer-watermark {
+      position: absolute;
+      right: -2px;
+      bottom: -10px;
+      width: 120px;
+      height: 120px;
+      opacity: .22;
+      background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.1) 0 24%, transparent 25%),
+                  radial-gradient(circle at 42% 57%, rgba(255,255,255,.1) 0 18%, transparent 19%);
+      pointer-events: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .nav { gap: 0; }
+      .nav-item { font-size: 14px; padding: 14px 8px 16px; }
+      .cards { width: min(780px, calc(100% - 40px)); gap: 30px 28px; }
+      .title { margin-left: 22px; font-size: 42px; }
+      .title-underline { margin-left: 22px; }
+    }
+
+    @media (max-width: 760px) {
+      .header { padding-right: 10px; }
+      .nav { display: none; }
+      .brand { min-width: 0; }
+      .brand-title { font-size: 28px; }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .hero-inner { min-height: auto; }
+      .footer { flex-direction: column; justify-content: center; gap: 10px; padding: 16px; height: auto; }
+      .footer-left { min-width: 0; }
+    }
+
+    @media (max-width: 560px) {
+      .topbar { font-size: 11px; padding: 0 12px; }
+      .brand-logo { width: 46px; height: 46px; }
+      .brand-title { font-size: 23px; }
+      .title { font-size: 34px; margin-left: 16px; }
+      .title-underline { margin-left: 16px; }
+      .cards { grid-template-columns: 1fr; width: calc(100% - 32px); }
+      .card-number { font-size: 84px; }
+      .card-label { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="left">
+        <img class="phone-icon" src="assets/images/phone.png" alt="contacts" />
+        <span>Call us:</span>
+        <span>09763322592</span>
+      </div>
+      <div class="right">Las Pinas National Science High School - 320304</div>
+    </div>
+
+    <div class="header-wrap">
+      <header class="header">
+        <div class="brand" id="homeBrand" role="link" tabindex="0" aria-label="Go to pogi home">
+          <img class="brand-logo" src="assets/images/sslg-logo.png" alt="pogi home logo" />
+          <div class="brand-text">
+            <div class="brand-title">SSLG</div>
+            <div class="brand-subtitle">S.Y. 2026-2027</div>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Primary">
+          <div class="nav-group">
+            <button class="nav-item" data-menu="home">Home </button>
+            
+          </div>
+
+          <div class="nav-group">
+            <button class="nav-item" data-menu="pages">Pages <span class="arrow">▾</span></button>
+            <div class="dropdown" data-dropdown="pages">
+              <button>Paham</button>
+              <div class="divider"></div>
+              <button>LPress</button>
+              <div class="divider"></div>
+              <button>Articles</button>
+            </div>
+          </div>
+
+          <div class="nav-group">
+            <button class="nav-item" data-menu="department">Directory <span class="arrow">▾</span></button>
+            <div class="dropdown" data-dropdown="department">
+              <button>The Council</button>
+              <div class="divider"></div>
+              <button>Faculty</button>
+              <div class="divider"></div>
+              <button>Committees</button>
+            </div>
+          </div>
+
+          <div class="nav-group">
+            <button class="nav-item" data-menu="event">Events <span class="arrow">▾</span></button>
+            <div class="dropdown" data-dropdown="event">
+              <button>Calendar</button>
+              <div class="divider"></div>
+              <button>Clubs</button>
+              <div class="divider"></div>
+              <button>Evaluation</button>
+            </div>
+          </div>
+
+          <div class="nav-group">
+            <button class="nav-item active" data-menu="materials">Materials <span class="arrow">▾</span></button>
+            <div class="dropdown open" data-dropdown="materials">
+              <a href="index.html">Reviewers</a>
+              <div class="divider"></div>
+              <button data-link="pogi drive link">Modules</button>
+              <div class="divider"></div>
+              <button data-link="pogi drive link">Worksheets</button>
+            </div>
+          </div>
+
+          <div class="nav-group">
+            <button class="nav-item" data-menu="contact">Support <span class="arrow">▾</span></button>
+            <div class="dropdown" data-dropdown="contact">
+              <button>Contact Us</button>
+              <div class="divider"></div>
+              <button>FAQs</button>
+              <div class="divider"></div>
+              <button>Forms</button>
+            </div>
+          </div>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="dropdown" id="hamburgerDropdown" style="right: 10px; left: auto; transform: translateY(-8px); min-width: 190px; top: calc(100% - 4px);">
+          <button>About</button>
+          <div class="divider"></div>
+          <button>Campus Tour</button>
+          <div class="divider"></div>
+          <button>Directory</button>
+          <div class="divider"></div>
+          <button>Feedback</button>
+        </div>
+      </header>
+    </div>
+
+    <main class="hero">
+      <div class="dots"></div>
+      <div class="watermark"></div>
+      <div class="hero-inner">
+        <h1 class="title">Reviewers</h1>
+        <div class="title-underline"></div>
+
+        <section class="cards" aria-label="Grade reviewers">
+          <a class="card-link" href="pogi drive link" target="_blank" rel="noopener">
+            <div class="card">
+              <div class="card-number">7</div>
+              <div class="card-label">Grade</div>
+            </div>
+          </a>
+          <a class="card-link" href="pogi drive link" target="_blank" rel="noopener">
+            <div class="card">
+              <div class="card-number">8</div>
+              <div class="card-label">Grade</div>
+            </div>
+          </a>
+          <a class="card-link" href="pogi drive link" target="_blank" rel="noopener">
+            <div class="card">
+              <div class="card-number">9</div>
+              <div class="card-label">Grade</div>
+            </div>
+          </a>
+          <a class="card-link" href="https://drive.google.com/drive/folders/1DNDyygOG1HeTK6YO1zfcxUoNM0zVKHE_?usp=share_link" target="_blank" rel="noopener">
+            <div class="card">
+              <div class="card-number">10</div>
+              <div class="card-label">Grade</div>
+            </div>
+          </a>
+          <a class="card-link" href="https://drive.google.com/drive/folders/117rMmujW3CoLtGGmZ0aA396G4KAix3YR?usp=share_link" target="_blank" rel="noopener">
+            <div class="card">
+              <div class="card-number">11</div>
+              <div class="card-label">Grade</div>
+            </div>
+          </a>
+          <a class="card-link" href="https://drive.google.com/drive/folders/1p8fXQq_pIbxQoEX9nXGeLI1ZVmdObdNp?usp=share_link" target="_blank" rel="noopener">
+            <div class="card">
+              <div class="card-number">12</div>
+              <div class="card-label">Grade</div>
+            </div>
+          </a>
+        </section>
+      </div>
+    </main>
+
+    <div class="footer-wrap">
+      <footer class="footer">
+        <a class="footer-left" id="footerHome" href="pogi home footer" aria-label="Go to home footer">
+          <img class="footer-logo" src="assets/images/footer-logo.png" alt="pogi home footer" />
+          <img class="footer-image-text" src="assets/images/sslg-fullname.png" alt="pogi home footer" />
+        </a>
+
+        <div class="socials" aria-label="Social media links">
+          <a class="social-link" href="pogi socmed 1" target="_blank" rel="noopener" aria-label="pogi altext 1">
+            <img src="assets/images/logo_yt.png" alt="pogi altext 1" />
+          </a>
+          <a class="social-link" href="pogi socmed 2" target="_blank" rel="noopener" aria-label="pogi altext 2">
+            <img src="assets/images/logo_tt.png" alt="pogi altext 2" />
+          </a>
+          <a class="social-link" href="https://www.facebook.com/LPSciSSLG" target="_blank" rel="noopener" aria-label="pogi altext 3">
+            <img src="assets/images/logo_fb.png" alt="pogi altext 3" />
+          </a>
+          <a class="social-link" href="https://www.instagram.com/lpsci_sslg/" target="_blank" rel="noopener" aria-label="pogi altext 4">
+            <img src="assets/images/logo_ig.png" alt="pogi altext 4" />
+          </a>
+        </div>
+        <div class="footer-watermark"></div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const navItems = [...document.querySelectorAll('.nav-item')];
+    const dropdowns = [...document.querySelectorAll('.dropdown[data-dropdown]')];
+    const hamburger = document.getElementById('hamburger');
+    const hamburgerDropdown = document.getElementById('hamburgerDropdown');
+    const homeBrand = document.getElementById('homeBrand');
+
+    function closeAll() {
+      navItems.forEach(btn => btn.classList.remove('active'));
+      dropdowns.forEach(menu => menu.classList.remove('open'));
+      hamburgerDropdown.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+
+   navItems.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const key = btn.getAttribute('data-menu');
+    const menu = document.querySelector(`.dropdown[data-dropdown="${key}"]`);
+
+    closeAll();
+
+    // ✅ If dropdown exists → open it
+    if (menu) {
+      menu.classList.add('open');
+    }
+
+    // ✅ ALWAYS add underline
+    btn.classList.add('active');
+  });
+});
+
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = hamburgerDropdown.classList.contains('open');
+
+      navItems.forEach(btn => btn.classList.remove('active'));
+      dropdowns.forEach(menu => menu.classList.remove('open'));
+
+      if (isOpen) {
+        hamburgerDropdown.classList.remove('open');
+        hamburger.classList.remove('open');
+      } else {
+        hamburgerDropdown.classList.add('open');
+        hamburger.classList.add('open');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      const insideHeader = e.target.closest('.header-wrap');
+      const insideFooter = e.target.closest('.footer-wrap');
+      if (!insideHeader && !insideFooter) closeAll();
+    });
+
+    homeBrand.addEventListener('click', () => {
+      window.location.href = 'pogi home';
+    });
+
+    homeBrand.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') window.location.href = 'pogi home';
+    });
+
+    document.getElementById('footerHome').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = 'pogi home footer';
+    });
+
+    document.querySelectorAll('[data-link]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        window.open('pogi drive link', '_blank', 'noopener');
+      });
+    });
+
+    document.querySelectorAll('.card-link').forEach(card => {
+      card.addEventListener('pointerdown', () => card.classList.add('active'));
+      card.addEventListener('pointerup', () => card.classList.remove('active'));
+      card.addEventListener('pointerleave', () => card.classList.remove('active'));
+      card.addEventListener('blur', () => card.classList.remove('active'));
+    });
+  </script>
+</body>
+</html>
