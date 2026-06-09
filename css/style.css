@@ -1,4 +1,4 @@
-@import url("/css/import.css");
+@import url("import.css");
 
 :root {
     --gold: #f2c14e;
@@ -36,7 +36,7 @@ button { font: inherit; }
     display: flex;
     flex-direction: column;
     position: relative;
-    background: url("/assets/images/reviewers-bg.png") center/cover no-repeat;
+    background: url("../assets/images/reviewers-bg.png") center/cover no-repeat;
 }
 /* maintenance bg */
     .maintenance-page {
@@ -44,7 +44,7 @@ button { font: inherit; }
     display: flex;
     flex-direction: column;
     position: relative;
-    background: url("/assets/images/maintenance-bg.png") center/cover no-repeat;
+    background: url("../assets/images/maintenance-bg.png") center/cover no-repeat;
 }
 
 /* Top gold bar */
@@ -54,7 +54,7 @@ button { font: inherit; }
     justify-content: space-between;
     align-items: center;
     padding: 0 18px;
-    background: url("/assets/images/gold.png") center/cover no-repeat;
+    background: url("../assets/images/gold.png") center/cover no-repeat;
     color: #6d1716;
     font-family: "Canva Sans", Arial, sans-serif;
     font-size: 13px;
@@ -89,7 +89,7 @@ button { font: inherit; }
 
 .header {
     height: var(--nav-h);
-    background: url("/assets/images/pogi header bg.png") center/cover no-repeat, #fff;
+    background: url("../assets/images/pogi header bg.png") center/cover no-repeat, #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -312,7 +312,7 @@ button { font: inherit; }
 .hero {
     position: relative;
     flex: 1;
-    background: url("/assets/images/pogi body bg.png") center/cover no-repeat;
+    background: url("../assets/images/pogi body bg.png") center/cover no-repeat;
     padding: 26px 0 32px;
     overflow: hidden;
 }
