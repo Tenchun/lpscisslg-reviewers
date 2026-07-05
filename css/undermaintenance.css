@@ -1,0 +1,96 @@
+  /* ===================================
+   UNDER MAINTENANCE PAGE ONLY
+   =================================== */
+
+.um-page{
+    position: relative;
+    min-height: 720px;
+    background: #891313;
+      flex: 1;
+      background: url('../assets/images/pogi body bg.png') center/cover no-repeat;
+      padding: 26px 0 32px;
+      overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.um-content{
+    position: relative;
+    z-index: 5;
+
+    text-align: center;
+
+    width: 100%;
+    max-width: 1200px;
+
+    padding: 120px 40px;
+}
+
+.um-title{
+    margin: 0;
+
+    font-family: 'Garet', sans-serif;
+    font-weight: 800;
+
+    font-size: 120px;
+    line-height: 1;
+
+    color: white;
+}
+
+.um-quote{
+    margin-top: 28px;
+
+    font-family: 'Canva Sans', sans-serif;
+    font-weight: 400;
+
+    font-size: 28px;
+    line-height: 1.4;
+
+    color: white;
+}
+
+
+/* Tablet */
+
+@media (max-width: 1000px){
+
+    .um-title{
+        font-size: 90px;
+    }
+
+    .um-quote{
+        font-size: 24px;
+    }
+
+    .um-watermark{
+        width: 700px;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 700px){
+
+    .um-page{
+        min-height: 600px;
+    }
+
+    .um-title{
+        font-size: 58px;
+    }
+
+    .um-quote{
+        font-size: 18px;
+    }
+
+    .um-watermark{
+        width: 450px;
+    }
+}
+
+.hamburger,
+  #hamburgerDropdown {
+    display: none !important;
+  }
